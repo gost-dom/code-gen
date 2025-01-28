@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	"github.com/dave/jennifer/jen"
-	"github.com/gost-dom/browser/code-gen/generators"
-	"github.com/gost-dom/browser/code-gen/webref/idl"
+	"github.com/gost-dom/code-gen/generators"
+	"github.com/gost-dom/code-gen/webref/idl"
 )
 
 /* -------- IdlInterface -------- */

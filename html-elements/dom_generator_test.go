@@ -4,8 +4,8 @@ import (
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 
-	g "github.com/gost-dom/browser/code-gen/generators"
-	. "github.com/gost-dom/browser/code-gen/html-elements"
+	g "github.com/gost-dom/code-gen/generators"
+	. "github.com/gost-dom/code-gen/html-elements"
 )
 
 func GenerateURL() (g.Generator, error) {

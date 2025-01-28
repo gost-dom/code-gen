@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"strings"
 
-	g "github.com/gost-dom/browser/code-gen/generators"
-	"github.com/gost-dom/browser/code-gen/webref/elements"
-	"github.com/gost-dom/browser/code-gen/webref/idl"
+	g "github.com/gost-dom/code-gen/generators"
+	"github.com/gost-dom/code-gen/webref/elements"
+	"github.com/gost-dom/code-gen/webref/idl"
 )
 
 // HTMLGeneratorReq specifies what to generate for a specific Web IDL spec. The

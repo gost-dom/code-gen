@@ -7,7 +7,7 @@ import (
 
 	"github.com/dave/jennifer/jen"
 
-	g "github.com/gost-dom/browser/code-gen/generators"
+	g "github.com/gost-dom/code-gen/generators"
 )
 
 func upperCaseFirstLetter(s string) string {
