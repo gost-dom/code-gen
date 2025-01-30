@@ -8,7 +8,7 @@ import (
 	"unicode"
 
 	g "github.com/gost-dom/code-gen/generators"
-	"github.com/gost-dom/code-gen/webref/idl"
+	"github.com/gost-dom/webref/idl"
 
 	"github.com/dave/jennifer/jen"
 )
