@@ -3,9 +3,9 @@ package htmlelements_test
 import (
 	"fmt"
 
+	. "github.com/gost-dom/generators"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/types"
-	. "github.com/gost-dom/code-gen/generators"
 )
 
 func HaveRendered(expected interface{}) types.GomegaMatcher {

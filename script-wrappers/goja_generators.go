@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/dave/jennifer/jen"
-	g "github.com/gost-dom/code-gen/generators"
+	g "github.com/gost-dom/generators"
 )
 
 var (

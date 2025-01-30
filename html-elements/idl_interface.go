@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/dave/jennifer/jen"
-	"github.com/gost-dom/code-gen/generators"
+	"github.com/gost-dom/generators"
 	"github.com/gost-dom/webref/idl"
 )
 

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	g "github.com/gost-dom/code-gen/generators"
+	g "github.com/gost-dom/generators"
 	"github.com/gost-dom/webref/elements"
 	"github.com/gost-dom/webref/idl"
 )

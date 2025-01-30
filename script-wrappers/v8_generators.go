@@ -3,7 +3,7 @@ package wrappers
 import (
 	"fmt"
 
-	g "github.com/gost-dom/code-gen/generators"
+	g "github.com/gost-dom/generators"
 
 	"github.com/dave/jennifer/jen"
 )
