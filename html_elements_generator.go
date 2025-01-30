@@ -50,7 +50,7 @@ func (b *builder) unIndentF(format string, args ...interface{}) {
 }
 
 func generateHtmlElements(writer io.Writer) error {
-	e, err := elements.Load()
+	e, err := elements.Load("html")
 	if err == nil {
 		file := newBuilder(writer)
 		WriteHeader(file)

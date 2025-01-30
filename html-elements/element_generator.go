@@ -42,7 +42,7 @@ type baseGenerator struct {
 }
 
 func CreateGenerator(req HTMLGeneratorReq) (baseGenerator, error) {
-	html, err := idl.LoadIdlParsed(req.SpecName)
+	html, err := idl.Load(req.SpecName)
 	return baseGenerator{
 		req,
 		html.Interfaces[req.InterfaceName],
@@ -82,7 +82,7 @@ func (gen baseGenerator) GenerateInterface() g.Generator {
 // CreateHTMLElementGenerator creates a generator for the element with
 func CreateHTMLElementGenerator(req HTMLGeneratorReq) (htmlElementGenerator, error) {
 	base, err1 := CreateGenerator(req)
-	el, err2 := elements.Load()
+	el, err2 := elements.Load("html")
 	tagName, err3 := el.GetTagNameForInterfaceError(req.InterfaceName)
 	err := errors.Join(err1, err2, err3)
 	if err != nil {
