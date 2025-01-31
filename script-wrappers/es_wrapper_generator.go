@@ -23,10 +23,10 @@ var (
 )
 
 const (
-	dom      = BASE_PKG + "/browser/dom"
-	html     = BASE_PKG + "/browser/html"
-	v8host   = BASE_PKG + "/browser/scripting/v8host"
-	gojahost = BASE_PKG + "/browser/scripting/gojahost"
+	dom      = BASE_PKG + "/dom"
+	html     = BASE_PKG + "/html"
+	v8host   = BASE_PKG + "/scripting/v8host"
+	gojahost = BASE_PKG + "/scripting/gojahost"
 	v8       = "github.com/tommie/v8go"
 	gojaSrc  = "github.com/dop251/goja"
 )

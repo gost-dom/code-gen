@@ -190,7 +190,7 @@ func CreateHTMLElementGenerators() ([]FileGeneratorSpec, error) {
 	generator, error := CreateHTMLElementGenerator(HTMLAnchorElementSpecs)
 	return []FileGeneratorSpec{
 		{"html_anchor_element",
-			"github.com/gost-dom/browser/browser/html",
+			"github.com/gost-dom/browser/html",
 			generator.Generator(),
 		},
 	}, errors.Join(error)

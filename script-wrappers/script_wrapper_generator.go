@@ -385,6 +385,18 @@ func NewScriptWrapperModulesGenerator() ScriptWrapperModulesGenerator {
 	history.Method("scrollRestoration").Ignore()
 	history.Method("state").SetEncoder("toJSON")
 
+	anchor := htmlSpecs.Type("HTMLAnchorElement")
+	anchor.CreateWrapper()
+	anchor.Method("download").Ignore()
+	anchor.Method("Ping").Ignore()
+	anchor.Method("ping").Ignore()
+	anchor.Method("rel").Ignore()
+	anchor.Method("hreflang").Ignore()
+	anchor.Method("type").Ignore()
+	anchor.Method("referrerPolicy").Ignore()
+	anchor.Method("relList").Ignore()
+	anchor.Method("text").Ignore()
+
 	return ScriptWrapperModulesGenerator{
 		Specs:            specs,
 		PackagePath:      v8host,
