@@ -11,8 +11,8 @@ type ESMethodArgument struct {
 	decoder      string
 }
 
-func (a *ESMethodArgument) Required()   { a.required = true }
-func (a *ESMethodArgument) HasDefault() { a.hasDefault = true }
+func (a *ESMethodArgument) Required() *ESMethodArgument   { a.required = true; return a }
+func (a *ESMethodArgument) HasDefault() *ESMethodArgument { a.hasDefault = true; return a }
 
 func (a *ESMethodArgument) HasDefaultValue(value string) {
 	a.hasDefault = true
