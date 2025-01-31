@@ -147,14 +147,12 @@ func createOperation(typeSpec WrapperTypeSpec, member idl.MemberSpec) ESOperatio
 		if arg := methodCustomization.Argument(arg.Name); arg != nil {
 			esArgumentSpec = *arg
 		}
-		if esArgumentSpec.ignored {
-			continue
-		}
 		esArg := ESOperationArgument{
 			Name:         arg.Name,
 			Optional:     arg.Optional && !esArgumentSpec.required,
 			IdlType:      arg.IdlType,
 			ArgumentSpec: esArgumentSpec,
+			Ignore:       esArgumentSpec.ignored,
 		}
 		if len(arg.IdlType.Types) > 0 {
 			slog.Warn(
@@ -180,6 +178,7 @@ type ESOperationArgument struct {
 	Variadic     bool
 	IdlType      idl.IdlTypes
 	ArgumentSpec ESMethodArgument
+	Ignore       bool
 }
 
 func (a ESOperationArgument) OptionalInGo() bool {

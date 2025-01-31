@@ -166,6 +166,7 @@ func CreateV8FunctionTemplateCallbackBody(
 		GetInstanceAndError(instance, err, data),
 		readArgsResult,
 		CreateV8WrapperMethodInstanceInvocations(
+			data,
 			op,
 			idlNameToGoName(op.Name),
 			readArgsResult.Args,
@@ -249,6 +250,7 @@ func CreateV8ConstructorWrapperBody(data ESConstructorData) g.Generator {
 	}
 	statements.Append(
 		CreateV8WrapperMethodInstanceInvocations(
+			data,
 			op,
 			baseFunctionName,
 			readArgsResult.Args,
@@ -261,6 +263,7 @@ func CreateV8ConstructorWrapperBody(data ESConstructorData) g.Generator {
 }
 
 func CreateV8WrapperMethodInstanceInvocations(
+	prototype ESConstructorData,
 	op ESOperation,
 	baseFunctionName string,
 	args []V8ReadArg,
@@ -268,14 +271,14 @@ func CreateV8WrapperMethodInstanceInvocations(
 	createCallInstance func(string, []g.Generator, ESOperation) g.Generator,
 	extraError bool,
 ) g.Generator {
-	arguments := op.Arguments
+	// arguments := op.Arguments
 	statements := g.StatementList()
-	for i := len(arguments); i >= 0; i-- {
+	for i := len(args); i >= 0; i-- {
 		functionName := baseFunctionName
-		for j, arg := range arguments {
+		for j, arg := range args {
 			if j < i {
-				if arg.OptionalInGo() {
-					functionName += idlNameToGoName(arg.Name)
+				if arg.Argument.OptionalInGo() {
+					functionName += idlNameToGoName(arg.Argument.Name)
 				}
 			}
 		}
@@ -298,7 +301,7 @@ func CreateV8WrapperMethodInstanceInvocations(
 		}
 		callInstance := createCallInstance(functionName, callArgs, op)
 		if i > 0 {
-			arg := arguments[i-1]
+			arg := args[i-1].Argument
 			statements.Append(g.StatementList(
 				g.IfStmt{
 					Condition: g.Raw(jen.Id("args").Dot("noOfReadArguments").Op(">=").Lit(i)),
@@ -436,9 +439,10 @@ func CreateV8IllegalConstructorBody(data ESConstructorData) g.Generator {
 }
 
 type V8ReadArg struct {
-	ArgName g.Generator
-	ErrName g.Generator
-	Index   int
+	Argument ESOperationArgument
+	ArgName  g.Generator
+	ErrName  g.Generator
+	Index    int
 }
 
 type V8ReadArguments struct {
@@ -468,16 +472,20 @@ func AssignArgs(data ESConstructorData, op ESOperation) g.Generator {
 
 func ReadArguments(data ESConstructorData, op ESOperation) (res V8ReadArguments) {
 	argCount := len(op.Arguments)
-	res.Args = make([]V8ReadArg, argCount)
+	res.Args = make([]V8ReadArg, 0, argCount)
 	statements := g.StatementList()
 	for i, arg := range op.Arguments {
 		argName := g.Id(sanitizeVarName(arg.Name))
 		errName := g.Id(fmt.Sprintf("err%d", i+1))
-		res.Args[i] = V8ReadArg{
-			ArgName: argName,
-			ErrName: errName,
-			Index:   i,
+		if arg.Ignore {
+			continue
 		}
+		res.Args = append(res.Args, V8ReadArg{
+			Argument: arg,
+			ArgName:  argName,
+			ErrName:  errName,
+			Index:    i,
+		})
 
 		var convertNames []string
 		if arg.Type != "" {
