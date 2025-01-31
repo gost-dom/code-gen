@@ -342,6 +342,7 @@ func NewScriptWrapperModulesGenerator() ScriptWrapperModulesGenerator {
 	window.Method("window").SetCustomImplementation()
 	window.Method("location").Ignore()
 	window.Method("parent").Ignore() // On `Node`
+	window.Method("history").SetCustomImplementation()
 
 	window.Method("prompt").SetNotImplemented()
 	window.Method("close").SetNotImplemented()
@@ -362,7 +363,6 @@ func NewScriptWrapperModulesGenerator() ScriptWrapperModulesGenerator {
 	window.Method("statusbar").SetNotImplemented()
 	window.Method("status").SetNotImplemented()
 	window.Method("toolbar").SetNotImplemented()
-	window.Method("history").SetNotImplemented()
 	window.Method("navigation").SetNotImplemented()
 	window.Method("customElements").SetNotImplemented()
 	window.Method("closed").SetNotImplemented()
