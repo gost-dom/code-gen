@@ -273,6 +273,7 @@ func CreateV8WrapperMethodInstanceInvocations(
 ) g.Generator {
 	// arguments := op.Arguments
 	statements := g.StatementList()
+	missingArgsConts := fmt.Sprintf("%s.%s: Missing arguments", prototype.Name(), op.Name)
 	for i := len(args); i >= 0; i-- {
 		functionName := baseFunctionName
 		for j, arg := range args {
@@ -314,7 +315,7 @@ func CreateV8WrapperMethodInstanceInvocations(
 				statements.Append(
 					g.Return(
 						g.Nil,
-						g.Raw(jen.Qual("errors", "New").Call(jen.Lit("Missing arguments"))),
+						g.Raw(jen.Qual("errors", "New").Call(jen.Lit(missingArgsConts))),
 					),
 				)
 				break
