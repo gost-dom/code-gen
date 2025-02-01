@@ -386,6 +386,7 @@ func NewScriptWrapperModulesGenerator() ScriptWrapperModulesGenerator {
 	history.Method("state").SetEncoder("toJSON")
 
 	anchor := htmlSpecs.Type("HTMLAnchorElement")
+	anchor.IncludeIncludes = true
 	anchor.CreateWrapper()
 	anchor.Method("download").Ignore()
 	anchor.Method("Ping").Ignore()
