@@ -190,11 +190,11 @@ func CreateSpecs() WrapperGeneratorsSpec {
 	domNode.Method("previousSibling").SetNoError()
 	domNode.Method("nextSibling").SetNoError()
 	domNode.Method("cloneNode").SetNoError().Argument("subtree").HasDefault()
+	domNode.Method("isSameNode").SetNoError()
 
 	domNode.Method("hasChildNodes").Ignore()
 	domNode.Method("normalize").Ignore()
 	domNode.Method("isEqualNode").Ignore()
-	domNode.Method("isSameNode").Ignore()
 	domNode.Method("compareDocumentPosition").Ignore()
 	domNode.Method("lookupPrefix").Ignore()
 	domNode.Method("lookupNamespaceURI").Ignore()
