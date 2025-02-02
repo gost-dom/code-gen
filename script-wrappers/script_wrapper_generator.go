@@ -345,13 +345,13 @@ func NewScriptWrapperModulesGenerator() ScriptWrapperModulesGenerator {
 	form.Method("autocomplete").SetNotImplemented()
 	form.Method("enctype").SetNotImplemented()
 	form.Method("encoding").SetNotImplemented()
-	form.Method("name").SetNotImplemented()
-	form.Method("noValidate").SetNotImplemented()
 	form.Method("target").SetNotImplemented()
 	form.Method("rel").SetNotImplemented()
 	form.Method("relList").SetNotImplemented()
 	form.Method("length").SetNotImplemented()
 
+	form.Method("name").Ignore()
+	form.Method("noValidate").Ignore()
 	window := htmlSpecs.Type("Window")
 	window.InnerTypeName = "Window"
 	window.CreateWrapper()
