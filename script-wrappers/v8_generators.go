@@ -136,11 +136,15 @@ func CreateV8FunctionTemplateCallbackBody(
 	data ESConstructorData,
 	op ESOperation,
 ) JenGenerator {
+	debug := g.NewValuePackage("Debug", log).Call(
+		g.Lit(fmt.Sprintf("V8 Function call: %s.%s", data.Name(), op.Name)))
 	if op.NotImplemented {
 		errMsg := fmt.Sprintf(
 			"%s.%s: Not implemented. Create an issue: %s", data.Name(), op.Name, ISSUE_URL,
 		)
-		return g.Return(g.Nil, g.Raw(jen.Qual("errors", "New").Call(jen.Lit(errMsg))))
+		return g.StatementList(
+			debug,
+			g.Return(g.Nil, g.Raw(jen.Qual("errors", "New").Call(jen.Lit(errMsg)))))
 	}
 	receiver := WrapperInstance{g.NewValue(data.Receiver)}
 	instance := g.NewValue("instance")
@@ -162,6 +166,7 @@ func CreateV8FunctionTemplateCallbackBody(
 		return callInstance.Generator
 	}
 	statements := g.StatementList(
+		debug,
 		AssignArgs(data, op),
 		GetInstanceAndError(instance, err, data),
 		readArgsResult,

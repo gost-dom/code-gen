@@ -27,6 +27,7 @@ const (
 	html     = BASE_PKG + "/html"
 	v8host   = BASE_PKG + "/scripting/v8host"
 	gojahost = BASE_PKG + "/scripting/gojahost"
+	log      = BASE_PKG + "/internal/log"
 	v8       = "github.com/tommie/v8go"
 	gojaSrc  = "github.com/dop251/goja"
 )
@@ -346,6 +347,8 @@ func sanitizeVarName(name string) string {
 	switch name {
 	case "type":
 		return "type_"
+	case "select":
+		return "select_"
 	}
 	return name
 }
